@@ -10,21 +10,25 @@ import { HomeComponent } from './home/home.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FaceRecognitionComponent } from './face-recognition/face-recognition.component';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavMenuComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    ApiAuthorizationModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' }
+   declarations: [
+      AppComponent,
+      NavMenuComponent,
+      HomeComponent,
+      FaceRecognitionComponent
+   ],
+   imports: [
+      BrowserAnimationsModule,
+      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+      HttpClientModule,
+      FormsModule,
+      ApiAuthorizationModule,
+      RouterModule.forRoot([
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'face', component: FaceRecognitionComponent, pathMatch: 'full', canActivate: [AuthorizeGuard] }
     ])
   ],
   providers: [
