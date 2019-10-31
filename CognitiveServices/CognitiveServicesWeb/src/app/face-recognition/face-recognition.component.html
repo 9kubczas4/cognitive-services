@@ -1,3 +1,17 @@
-<p>
-  face-recognition works!
-</p>
+<div class="container">
+  <div class="cognitive-services-face__file-container" appDragAndDrop (fileDropped)="uploadFile($event)" *ngIf="!file">
+    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+    <div class="cognitive-services-face__file-browser">
+      <mat-icon class="cognitive-services-face__file-cloud-icon">cloud_upload</mat-icon>
+      <button mat-raised-button color="primary" (click)="fileInput.click()">Browse</button>
+    </div>
+  </div>
+  <div class="cognitive-services-face__image-container" *ngIf="fileUrl">
+    <div class="cognitive-services-face__image-manage">
+      <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+      <button mat-raised-button color="primary" (click)="fileInput.click()">Change</button>
+      <button mat-raised-button color="secondary" (click)="process()">Process</button>
+    </div>
+    <img [src]="fileUrl" class="img-fluid img-thumbnail cognitive-services-face__image" alt="Uploaded Image">
+  </div>
+</div>
