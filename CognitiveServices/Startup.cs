@@ -11,6 +11,8 @@ using CognitiveServices.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CognitiveServices.Services;
+using Microsoft.ProjectOxford.Face;
 
 namespace CognitiveServices
 {
@@ -94,6 +96,11 @@ namespace CognitiveServices
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void InitServices(IServiceCollection services)
+        {
+            // services.AddScoped<IFaceServiceClient>(new FaceServiceClient();
         }
     }
 }
