@@ -11,16 +11,23 @@ using CognitiveServices.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CognitiveServices.Services;
 using Microsoft.ProjectOxford.Face;
 
 namespace CognitiveServices
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env, IConfiguration configuration)
         {
-            Configuration = configuration;
+            if (env.IsDevelopment())
+            {
+                var builder = new ConfigurationBuilder();
+                builder.AddUserSecrets<Startup>();
+                Configuration = builder.Build();
+            } else
+            {
+                Configuration = configuration;
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -47,6 +54,8 @@ namespace CognitiveServices
             {
                 configuration.RootPath = "CognitiveServicesWeb/dist";
             });
+
+            InitServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,7 +109,8 @@ namespace CognitiveServices
 
         private void InitServices(IServiceCollection services)
         {
-            // services.AddScoped<IFaceServiceClient>(new FaceServiceClient();
+            // todo move it to .net core secrets
+            services.AddScoped<IFaceServiceClient>((services) => new FaceServiceClient(Configuration["MicrosoftCognitoServices:ApiKey"], Configuration["MicrosoftCognitoServices:RootUri"]));
         }
     }
 }

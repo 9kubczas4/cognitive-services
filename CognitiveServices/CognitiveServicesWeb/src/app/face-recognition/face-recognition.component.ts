@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-face-recognition',
@@ -9,7 +10,7 @@ export class FaceRecognitionComponent implements OnInit {
   public file: File;
   public fileUrl: string | ArrayBuffer;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
   }
@@ -18,12 +19,28 @@ export class FaceRecognitionComponent implements OnInit {
     this.file = event[0];
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.fileUrl = e.target.result;
+      if (e && e.target) {
+        const target: any = e.target;
+        this.fileUrl = target.result;
+      }
     };
     reader.readAsDataURL(this.file);
   }
 
   public process(): void {
-
+    const formData = new FormData();
+    formData.append('file', this.file, this.file.name);
+    this.httpClient.post(`/api/face/detect`, formData).subscribe((result) => {
+      console.log(result);
+    }, (err) => {
+      console.log(err);
+    });
   }
+}
+
+export interface FaceDetectResponse {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
 }
