@@ -12,7 +12,7 @@
       <button mat-raised-button color="primary" (click)="fileInput.click()">Change</button>
       <button mat-raised-button color="secondary" (click)="process()">Process</button>
     </div>
-    <div class="cognitive-services-face__image-wrapper">
+    <div class="cognitive-services-face__image-wrapper" (resized)="onResized($event)">
       <img [src]="fileUrl" class="cognitive-services-face__image" alt="Uploaded Image">
     </div>
   </div>
