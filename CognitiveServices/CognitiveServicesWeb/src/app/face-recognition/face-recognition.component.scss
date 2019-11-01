@@ -82,5 +82,10 @@
     &__selection {
         position: absolute;
         border: 2px solid $blue;
+
+        &:hover {
+            cursor: pointer;
+            border: 2px solid lighten($blue, 15);
+        }
     }
 }

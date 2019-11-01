@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FaceApiService } from '../services/face-api.service';
 import { ResizedEvent } from 'angular-resize-event';
-import { SpinnerService } from '../services/spinner.service';
 import { FaceRectangle } from '../interfaces/face-rectangle';
 import { FaceRecogntion } from '../interfaces/face-recognition';
+import { SpinnerService } from '../services/spinner.service';
 
 @Component({
   selector: 'app-face-recognition',
@@ -52,12 +52,10 @@ export class FaceRecognitionComponent implements OnInit {
     formData.append('file', this.file, this.file.name);
     this.spinnerService.show();
     this.faceApiService.detectFace(formData).then((response: Array<FaceRecogntion>) => {
-      console.log(response);
       this.faceRectangles = response.map((r) => r.faceRectangle);
       this.spinnerService.hide();
     })
     .catch((err) => {
-      console.log(err);
       this.spinnerService.hide();
     });
   }
@@ -82,6 +80,10 @@ export class FaceRecognitionComponent implements OnInit {
 
   public clearSelections(): void {
     this.faceRectangles = [];
+  }
+
+  public showDetails(index: number): void {
+
   }
 
   private calculateScaleRatio() {
