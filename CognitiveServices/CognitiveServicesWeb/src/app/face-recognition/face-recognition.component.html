@@ -12,6 +12,8 @@
       <button mat-raised-button color="primary" (click)="fileInput.click()">Change</button>
       <button mat-raised-button color="secondary" (click)="process()">Process</button>
     </div>
-    <img [src]="fileUrl" class="img-fluid img-thumbnail cognitive-services-face__image" alt="Uploaded Image">
+    <div class="cognitive-services-face__image-wrapper">
+      <img [src]="fileUrl" class="cognitive-services-face__image" alt="Uploaded Image">
+    </div>
   </div>
 </div>

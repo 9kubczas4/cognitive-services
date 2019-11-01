@@ -50,8 +50,21 @@
         }
     }
 
+    &__image-wrapper {
+        max-height: 60vh;
+        display: flex;
+        justify-content: space-between;
+        transition: all 0.5s ease-in;
+    }
+
     &__image {
         display: flex;
         margin: auto;
+        width: auto;
+        max-height: 60vh;
+        padding: .25rem;
+        background-color: $white;
+        border: 1px solid $silver;
+        border-radius: .25rem;
     }
 }

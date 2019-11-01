@@ -15,6 +15,7 @@ import { FaceRecognitionComponent } from './face-recognition/face-recognition.co
 import { MatButtonModule } from '@angular/material/button';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { DragAndDropDirective } from './directives/drag-and-drop.directive';
+import { FaceApiService } from './services/face-api.service';
 
 @NgModule({
    declarations: [
@@ -38,6 +39,7 @@ import { DragAndDropDirective } from './directives/drag-and-drop.directive';
     ])
   ],
   providers: [
+    FaceApiService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
