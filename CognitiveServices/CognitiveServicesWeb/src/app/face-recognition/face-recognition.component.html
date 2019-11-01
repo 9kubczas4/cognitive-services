@@ -9,11 +9,14 @@
   <div class="cognitive-services-face__image-container" *ngIf="fileUrl">
     <div class="cognitive-services-face__image-manage">
       <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
-      <button mat-raised-button color="primary" (click)="fileInput.click()">Change</button>
+      <button mat-raised-button color="primary" (click)="fileInput.click()" (click)="clearSelections()">Change</button>
       <button mat-raised-button color="secondary" (click)="process()">Process</button>
     </div>
     <div class="cognitive-services-face__image-wrapper" (resized)="onResized($event)">
       <img [src]="fileUrl" class="cognitive-services-face__image" alt="Uploaded Image">
+      <ul class="cognitive-services-face__selection-list">
+        <li *ngFor="let face of faceRectangles" class="cognitive-services-face__selection" [style.top]="calculateTopPx(face)" [style.left]="calculateLeftPx(face)" [style.height]="calculateSquareSize(face)" [style.width]="calculateSquareSize(face)"></li>
+      </ul>
     </div>
   </div>
 </div>

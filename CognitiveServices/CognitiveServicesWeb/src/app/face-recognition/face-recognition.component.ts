@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FaceApiService } from '../services/face-api.service';
-import { FaceRecogntionResponse } from '../interfaces/face-recognition-response';
 import { ResizedEvent } from 'angular-resize-event';
 import { SpinnerService } from '../services/spinner.service';
+import { FaceRectangle } from '../interfaces/face-rectangle';
+import { FaceRecogntion } from '../interfaces/face-recognition';
 
 @Component({
   selector: 'app-face-recognition',
@@ -12,6 +13,7 @@ import { SpinnerService } from '../services/spinner.service';
 export class FaceRecognitionComponent implements OnInit {
   public file: File;
   public fileUrl: string | ArrayBuffer;
+  public faceRectangles: Array<FaceRectangle>;
 
   private originalHeight: number;
   private originalWidth: number;
@@ -49,8 +51,9 @@ export class FaceRecognitionComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file, this.file.name);
     this.spinnerService.show();
-    this.faceApiService.detectFace(formData).then((response: FaceRecogntionResponse) => {
+    this.faceApiService.detectFace(formData).then((response: Array<FaceRecogntion>) => {
       console.log(response);
+      this.faceRectangles = response.map((r) => r.faceRectangle);
       this.spinnerService.hide();
     })
     .catch((err) => {
@@ -65,8 +68,24 @@ export class FaceRecognitionComponent implements OnInit {
     this.calculateScaleRatio();
   }
 
+  public calculateTopPx(face: FaceRectangle): string {
+    return `${face.top * this.scaleYRatio}px`;
+  }
+
+  public calculateLeftPx(face: FaceRectangle): string {
+    return `${face.left * this.scaleXRatio}px`;
+  }
+
+  public calculateSquareSize(face: FaceRectangle): string {
+    return `${face.width * this.scaleXRatio * 1.1}px`;
+  }
+
+  public clearSelections(): void {
+    this.faceRectangles = [];
+  }
+
   private calculateScaleRatio() {
     this.scaleYRatio = this.realHeight / this.originalHeight;
-    this.scaleXRatio = this.realWidth / this.originalHeight;
+    this.scaleXRatio = this.realWidth / this.originalWidth;
   }
 }

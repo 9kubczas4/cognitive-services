@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FaceRecogntionResponse } from './../interfaces/face-recognition-response';
+import { FaceRecogntion } from '../interfaces/face-recognition';
 
 @Injectable()
 export class FaceApiService {
@@ -8,7 +8,7 @@ export class FaceApiService {
 
     }
 
-    public detectFace(form: FormData): Promise<FaceRecogntionResponse> {
-        return this.httpClient.post<FaceRecogntionResponse>(`/api/face/detect`, form).toPromise();
+    public detectFace(form: FormData): Promise<Array<FaceRecogntion>> {
+        return this.httpClient.post<Array<FaceRecogntion>>(`/api/face/detect`, form).toPromise();
     }
 }

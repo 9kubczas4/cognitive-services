@@ -52,8 +52,10 @@
 
     &__image-wrapper {
         max-height: 60vh;
+        width: fit-content;
         display: flex;
         justify-content: space-between;
+        margin: auto;
         transition: all 0.5s ease-in;
     }
 
@@ -66,5 +68,19 @@
         background-color: $white;
         border: 1px solid $silver;
         border-radius: .25rem;
+    }
+    
+    &__selection-list {
+        position: absolute;
+        list-style: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__selection {
+        position: absolute;
+        border: 2px solid $blue;
     }
 }

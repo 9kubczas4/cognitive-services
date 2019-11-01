@@ -1,7 +1,7 @@
 import { FaceRectangle } from './face-rectangle';
 import { FaceAttributes } from './face-attributes';
 
-export interface FaceRecogntionResponse {
+export interface FaceRecogntion {
     faceRectangle: FaceRectangle;
     faceAttributes: FaceAttributes;
 }
