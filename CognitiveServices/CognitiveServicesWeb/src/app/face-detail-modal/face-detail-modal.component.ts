@@ -22,6 +22,6 @@ export class FaceDetailModalComponent implements OnInit {
   }
 
   public get hairs(): Array<HairColor> {
-    return _.sort();
+    return _.sortBy(this.data.hair.hairColor, ['confidence'], ['desc']);
   }
 }

@@ -39,11 +39,11 @@
             </mat-list-item>
             <mat-divider></mat-divider>
             <h3 mat-subheader>Hair</h3>
-            <mat-list-item>
-                <h4 mat-line>Bald {{data.hair.bald}}</h4>
-            </mat-list-item>
             <mat-list-item *ngFor="let hair of data.hair.hairColor">
                 <h4 mat-line>{{getHairColorName(hair.color)}} {{hair.confidence}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Bald {{data.hair.bald}}</h4>
             </mat-list-item>
         </mat-list>
     </div>
