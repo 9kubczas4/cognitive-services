@@ -109,7 +109,6 @@ namespace CognitiveServices
 
         private void InitServices(IServiceCollection services)
         {
-            // todo move it to .net core secrets
             services.AddScoped<IFaceServiceClient>((services) => new FaceServiceClient(Configuration["MicrosoftCognitoServices:ApiKey"], Configuration["MicrosoftCognitoServices:RootUri"]));
         }
     }
