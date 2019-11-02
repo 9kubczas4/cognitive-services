@@ -1,0 +1,15 @@
+@import './../../assets/styles/styles';
+
+.cognitive-services-face-detail {
+    width: 350px;
+    max-height: 500px;
+    padding: 0 !important;
+
+    @include breakpoint(xs) {
+        width: 280px;
+    }
+
+    &__content {
+        padding: 24px;
+    }
+}

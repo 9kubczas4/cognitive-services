@@ -1,0 +1,91 @@
+@import './../../assets/styles/styles';
+
+.cognitive-services-face {
+    &__file-container {
+        height: 300px;
+        background: $white;
+        border: 5px dotted $platinum;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: border 0.3s linear;
+
+        @include breakpoint(xs) {
+            height: 150px;
+        }
+
+        &:hover {
+            border: 5px dotted darken($platinum, 10);
+            cursor: pointer;
+        }
+    }
+
+    &__file-browser {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__file-cloud-icon {
+        color: $primary;
+    }
+
+    &__image-manage {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 1rem;
+
+        button:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    &__image-container {
+        max-height: 80vh;
+        width: 100%;
+        padding: 1rem;
+
+        @include breakpoint(xs) {
+            padding: 0.5rem;
+        }
+    }
+
+    &__image-wrapper {
+        max-height: 60vh;
+        width: fit-content;
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        transition: all 0.5s ease-in;
+    }
+
+    &__image {
+        display: flex;
+        margin: auto;
+        width: auto;
+        max-height: 60vh;
+        padding: .25rem;
+        background-color: $white;
+        border: 1px solid $silver;
+        border-radius: .25rem;
+    }
+    
+    &__selection-list {
+        position: absolute;
+        list-style: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__selection {
+        position: absolute;
+        border: 2px solid $blue;
+
+        &:hover {
+            cursor: pointer;
+            border: 2px solid lighten($blue, 15);
+        }
+    }
+}

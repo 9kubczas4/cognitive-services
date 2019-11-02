@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="cognitive-services-face__file-container" appDragAndDrop (fileDropped)="uploadFile($event)" *ngIf="!file">
+    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+    <div class="cognitive-services-face__file-browser">
+      <mat-icon class="cognitive-services-face__file-cloud-icon">cloud_upload</mat-icon>
+      <button mat-raised-button color="primary" (click)="fileInput.click()">Browse</button>
+    </div>
+  </div>
+  <div class="cognitive-services-face__image-container" *ngIf="fileUrl">
+    <div class="cognitive-services-face__image-manage">
+      <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+      <button mat-raised-button color="primary" (click)="fileInput.click()" (click)="clearSelections()">Change</button>
+      <button mat-raised-button color="secondary" (click)="process()">Process</button>
+    </div>
+    <div class="cognitive-services-face__image-wrapper" (resized)="onResized($event)">
+      <img [src]="fileUrl" class="cognitive-services-face__image" alt="Uploaded Image">
+      <ul class="cognitive-services-face__selection-list">
+        <li *ngFor="let face of faceRectangles; let i = index" class="cognitive-services-face__selection"
+          (click)="showDetails(i)"
+          [style.top]="calculateTopPx(face)" 
+          [style.left]="calculateLeftPx(face)"
+          [style.height]="calculateSquareSize(face)"
+          [style.width]="calculateSquareSize(face)"></li>
+      </ul>
+    </div>
+  </div>
+</div>
