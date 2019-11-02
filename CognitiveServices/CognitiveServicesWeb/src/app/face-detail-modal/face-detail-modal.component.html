@@ -1,0 +1,50 @@
+<div class="cognitive-services-face-detail"
+    cdkDrag
+    cdkDragRootElement=".cdk-overlay-pane" 
+    cdkDragHandle>
+    <div class="cognitive-services-face-detail__content">
+        <mat-list>
+            <h3 mat-subheader>General</h3>
+            <mat-list-item>
+              <mat-icon mat-list-icon>emoji_people</mat-icon>
+              <h4 mat-line>Age {{ data.age }}</h4>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>group</mat-icon>
+              <h4 mat-line>Gender {{ data.gender }}</h4>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-icon mat-list-icon>emoji_emotions</mat-icon>
+              <h4 mat-line>Smile score: {{ data.smile }}</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Emotions</h3>
+            <mat-list-item>
+                <h4 mat-line>Anger {{data.emotion.anger}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Contempt {{data.emotion.contempt}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Disgust {{data.emotion.disgust}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Neutral  {{data.emotion.neutral}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Sadness {{data.emotion.sadness}}</h4>
+            </mat-list-item>
+            <mat-list-item>
+                <h4 mat-line>Surprise {{data.emotion.surprise}}</h4>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <h3 mat-subheader>Hair</h3>
+            <mat-list-item>
+                <h4 mat-line>Bald {{data.hair.bald}}</h4>
+            </mat-list-item>
+            <mat-list-item *ngFor="let hair of data.hair.hairColor">
+                <h4 mat-line>{{getHairColorName(hair.color)}} {{hair.confidence}}</h4>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>

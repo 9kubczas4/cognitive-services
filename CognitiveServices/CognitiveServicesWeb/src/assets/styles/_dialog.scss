@@ -1,0 +1,5 @@
+.cdk-overlay-pane {
+    @include breakpoint(xs) {
+        margin: auto !important;
+    }
+}

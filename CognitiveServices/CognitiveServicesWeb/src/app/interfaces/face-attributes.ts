@@ -5,6 +5,6 @@ export interface FaceAttributes {
     age: number;
     gender: string;
     smile: number;
-    emotionScores: EmotionScores;
+    emotion: EmotionScores;
     hair: Hair;
 }

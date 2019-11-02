@@ -4,6 +4,9 @@ import { ResizedEvent } from 'angular-resize-event';
 import { FaceRectangle } from '../interfaces/face-rectangle';
 import { FaceRecogntion } from '../interfaces/face-recognition';
 import { SpinnerService } from '../services/spinner.service';
+import { MatDialog } from '@angular/material/dialog';
+import { FaceDetailModalComponent } from '../face-detail-modal/face-detail-modal.component';
+import { FaceAttributes } from '../interfaces/face-attributes';
 
 @Component({
   selector: 'app-face-recognition',
@@ -14,6 +17,7 @@ export class FaceRecognitionComponent implements OnInit {
   public file: File;
   public fileUrl: string | ArrayBuffer;
   public faceRectangles: Array<FaceRectangle>;
+  public faceAttributes: Array<FaceAttributes>;
 
   private originalHeight: number;
   private originalWidth: number;
@@ -22,7 +26,7 @@ export class FaceRecognitionComponent implements OnInit {
   private scaleXRatio: number;
   private scaleYRatio: number;
 
-  constructor(private faceApiService: FaceApiService, private spinnerService: SpinnerService) { }
+  constructor(private faceApiService: FaceApiService, private spinnerService: SpinnerService, private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -53,6 +57,7 @@ export class FaceRecognitionComponent implements OnInit {
     this.spinnerService.show();
     this.faceApiService.detectFace(formData).then((response: Array<FaceRecogntion>) => {
       this.faceRectangles = response.map((r) => r.faceRectangle);
+      this.faceAttributes = response.map((r) => r.faceAttributes);
       this.spinnerService.hide();
     })
     .catch((err) => {
@@ -83,7 +88,14 @@ export class FaceRecognitionComponent implements OnInit {
   }
 
   public showDetails(index: number): void {
-
+    this.dialog.open(FaceDetailModalComponent, {
+      data: this.faceAttributes[index],
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      position: {
+        top: '60px',
+        left: '60px'
+      }
+    });
   }
 
   private calculateScaleRatio() {
